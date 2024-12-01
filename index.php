@@ -105,38 +105,157 @@ while (count($options) < 4) {
 }
 shuffle($options);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple Mathematics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz</title>
+    <style>
+        :root {
+            --background: #f9f9f9;
+            --text-color: #333;
+            --button-bg: #007bff;
+            --button-hover: #0056b3;
+            --card-bg: #fff;
+            --border-color: #ddd;
+        }
+
+        [data-theme="dark"] {
+            --background: #333;
+            --text-color: #f9f9f9;
+            --button-bg: #61dafb;
+            --button-hover: #21a1f1;
+            --card-bg: #444;
+            --border-color: #555;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button, a {
+            flex: 1;
+            text-align: center;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        button:hover, a:hover {
+            background-color: var(--button-hover);
+        }
+
+        .theme-toggle {
+            margin: 10px auto;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: var(--button-bg);
+        }
+    </style>
 </head>
 <body>
-    <h1>Simple Mathematics</h1>
-
-    <p>Score: Correct: <?php echo $_SESSION['score']['correct']; ?> | Wrong: <?php echo $_SESSION['score']['wrong']; ?></p>
-    <?php if (isset($message)) : ?>
-        <p><?php echo $message; ?></p>
-    <?php endif; ?>
-
-    <form method="POST">
-        <?php if ($_SESSION['remaining_items'] > 0) : ?>
-            <p>What is <?php echo "$num1 $operator $num2 = ?"; ?></p>
-            <?php foreach ($options as $index => $option) : ?>
-                <label>
-                    <input type="radio" name="answer" value="<?php echo $option; ?>"> <?php echo $option; ?>
-                </label><br>
-            <?php endforeach; ?>
-            <button type="submit">Submit</button>
-        <?php else : ?>
-            <p>Quiz completed! Restart to play again.</p>
+    <div class="container">
+        <h1>Math Quiz</h1>
+        <p>Score: Correct: <?php echo $_SESSION['score']['correct']; ?> | Wrong: <?php echo $_SESSION['score']['wrong']; ?></p>
+        <?php if (isset($message)) : ?>
+            <p><?php echo $message; ?></p>
         <?php endif; ?>
-    </form>
 
-    <form method="POST">
-        <button name="start_quiz">Start Quiz</button>
-        <button name="close">Close</button>
-        <a href="settings.php">Settings >></a>
-    </form>
+        <form method="POST">
+            <?php if ($_SESSION['remaining_items'] > 0) : ?>
+                <p><strong>What is <?php echo "$num1 $operator $num2 = ?"; ?></strong></p>
+                <?php foreach ($options as $index => $option) : ?>
+                    <label>
+                        <input type="radio" name="answer" value="<?php echo $option; ?>"> <?php echo $option; ?>
+                    </label>
+                <?php endforeach; ?>
+                <button type="submit">Submit</button>
+            <?php else : ?>
+                <p>Quiz completed! Restart to play again.</p>
+            <?php endif; ?>
+        </form>
+
+        <div class="buttons">
+            <form method="POST" style="flex: 1;">
+                <button name="start_quiz">Restart Quiz</button>
+            </form>
+            <form method="POST" style="flex: 1;">
+                <button name="close">Close</button>
+            </form>
+            <a href="settings.php">Settings</a>
+        </div>
+    </div>
+    <div class="theme-toggle" onclick="toggleTheme()">🌙 Switch Theme</div>
+
+    <script>
+        const toggleTheme = () => {
+            const currentTheme = document.body.getAttribute("data-theme");
+            document.body.setAttribute(
+                "data-theme",
+                currentTheme === "dark" ? "light" : "dark"
+            );
+        };
+    </script>
 </body>
 </html>
+
