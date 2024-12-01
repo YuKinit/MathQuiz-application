@@ -54,7 +54,9 @@ function generateQuestion($operator, $range) {
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['answer'])) {
+    if (!isset($_POST['answer'])) {
+        $message = "You need to choose an answer!";
+    }   elseif (isset($_POST['answer'])) {
         $correctAnswer = $_SESSION['current_question'][2];
         $userAnswer = intval($_POST['answer']);
 
