@@ -163,7 +163,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="index.php">Back to Quiz</a>
         </form>
     </div>
-    <div class="theme-toggle" onclick="toggleTheme()">🌙 Switch Theme</div>
 
     <script>
         const toggleCustomRange = () => {
@@ -172,15 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             customRangeFields.style.display = level === "3" ? "block" : "none";
         };
 
-        const toggleTheme = () => {
-            const currentTheme = document.body.getAttribute("data-theme");
-            document.body.setAttribute(
-                "data-theme",
-                currentTheme === "dark" ? "light" : "dark"
-            );
-        };
 
-        // Initialize visibility on page load
         window.onload = toggleCustomRange;
     </script>
 </body>
