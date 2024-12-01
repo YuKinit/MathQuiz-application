@@ -239,8 +239,8 @@ shuffle($options);
             <form method="POST" style="flex: 1;">
                 <button name="start_quiz">Restart Quiz</button>
             </form>
-            <form method="POST" style="flex: 1;">
-                <button name="close">Close</button>
+            <form style="flex: 1;">
+                <a href="homepage.php" class="button">Close</a>
             </form>
             <a href="settings.php">Settings</a>
         </div>
