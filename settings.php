@@ -160,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" name="max_diff" value="<?php echo $_SESSION['settings']['max_diff']; ?>">
 
             <button type="submit">Save Settings</button>
-            <a href="index.php">Back to Quiz</a>
+            <a href="homepage.php">Start to Quiz</a>
         </form>
     </div>
 
