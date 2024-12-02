@@ -13,6 +13,11 @@ if (!isset($_SESSION['score']) || !is_array($_SESSION['score'])) {
     }
 }
 
+
+if (!isset($_SESSION['score']) || isset($_POST['start_quiz'])) {
+    $_SESSION['score'] = ['correct' => 0, 'wrong' => 0];
+}
+
 // Initialize settings if not set
 if (!isset($_SESSION['settings'])) {
     $_SESSION['settings'] = [
